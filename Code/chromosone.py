@@ -6,10 +6,10 @@
 class chromosone:
     
     def __init__(self):
-        "Constructor"
+        '''Create a chromosone i.e melody'''
 
     def __repr__(self):
-        "Print"
+        '''Representation of the chromosone structure'''
 
     
 
