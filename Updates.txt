@@ -1,0 +1,5 @@
+ABEERA 16-04-2019
+Please see music composition code in the resources folder and lets see how we can use that to create a chromosone
+Then we can work on the fitness function which will take more time. 
+Q: Are we using mutation and/or Crossover?
+______________________________________________
