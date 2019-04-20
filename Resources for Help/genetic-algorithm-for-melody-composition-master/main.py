@@ -67,10 +67,11 @@ def score_population(population):
     for dna in population:
         score = 0
         score += 3*octave_range_fitness(dna)
-        score += 2*monotonic_notes_fitness(dna)
-        score += 2*no_jump_fitness(dna)
-        score += down_beat_fitness(dna)
-        score += back_beat_fitness(dna)
+        #Even one of the functions does a good job. We can work on this fitness for now
+        #score += 2*monotonic_notes_fitness(dna)
+        #score += 2*no_jump_fitness(dna)
+        #score += down_beat_fitness(dna)
+        #score += back_beat_fitness(dna)
 
         population_with_score.append((score, dna))
 

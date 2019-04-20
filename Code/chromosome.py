@@ -3,7 +3,7 @@
 
 
 
-class chromosone:
+class chromosome:
     
     def __init__(self):
         '''Create a chromosone i.e melody'''
