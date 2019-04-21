@@ -1,10 +1,17 @@
-#GeneticAlgorithm
+# GeneticAlgorithm
+from chromosome import chromosome
+from constants import *
 
 
-'''Initializes chromosones to construct the initial population'''
-def Initialise_Population():
-    print("Hello")
-
+def Initialise_Population(pop_size):
+    '''Initializes chromosones to construct the initial population'''
+    pop = []
+    for i in range(pop_size):
+        individual = []
+        for j in range(BEATS_PER_SECTION):
+            individual.append(chromosome())
+        pop.append(individual)
+    return pop
 
 
 '''
@@ -14,25 +21,35 @@ we have concluded that Eliticism works best hence, the selected selection scheme
 Parent Selection : Truncation
 Survuval Selection: Truncation
 '''
-def Truncation():
 
+def Truncation():
+    pass
+
+
+def total_fitness(individual):
+    '''
+    Sums up fitness of every bar
+    '''
+    for _ in range(BARS_PER_SECTION):
+        pass
+
+def fitness():
+    '''
+    Calculates fitness of one bar
+    '''
+    pass
 
 def Crossover():
+    pass
 
 
 def Mutate():
-
+    pass
 
 
 def Evolve():
+    pass
 
 
 def main():
-    Initialise_Population()
-
-
-
-
-
-
-    
+    Initialise_Population(POPULATION)
