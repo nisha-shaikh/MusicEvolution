@@ -1,4 +1,4 @@
-
+'''This file identifies some constants that we will be using in our code'''
 
 #OCTAVES
 #2 to 7

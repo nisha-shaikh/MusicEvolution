@@ -1,4 +1,5 @@
-# GeneticAlgorithm
+# Genetic Algorithm fpr Music Composition
+
 from chromosome import chromosome
 from constants import *
 

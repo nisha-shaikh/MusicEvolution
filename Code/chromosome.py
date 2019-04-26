@@ -20,7 +20,7 @@ class chromosome:
 
             self.melody.append((octave_idx, note_idx, abs_note, duration))
 
-        self.fitness=calculateFitness()
+        self.fitness=myFitnessScore()
             
     def __repr__(self):
         '''Representation of the chromosone structure'''
@@ -30,10 +30,15 @@ class chromosome:
         '''Uses pysynth to play the music'''
         pass
 
+    def myFitnessScore(self):
+        '''Based on some characteristics of music, fitness score is evaluated'''
+        self.fitness+=20
+        return self.fitness
 
-    def calculateFitness(self):
-        '''Finds the fitness of the chromosome based on some music qualities'''
+    def FitnessByOctave(self):#Only an example
+        '''Finds the fitness of the chromosome based on the music quality of'''#Specify the quality
         self.fitness=20
+        return self.fitness
 
         
         
