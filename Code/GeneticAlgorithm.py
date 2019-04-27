@@ -8,6 +8,8 @@ import random
 ITER=int(input("Enter the number of iterations: "))
 POP_SIZE=int(input("Enter population size: "))
 MUTATION_RATE=float(input("Enter mutation rate between 0 and 1: "))
+GENERATIONS=int(input("Enter number of generations: "))
+OFFSPRINGS=int(input("Enter number of offsprings: "))
 
 def Initialise_Population(pop_size):
     '''Initializes chromosones to construct the initial population'''
