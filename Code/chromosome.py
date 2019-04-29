@@ -23,11 +23,12 @@ class chromosome:
 
         self.chromoLength = len(self.melody)
         self.fitness = self.fitnessScore()
+        #self.fitness=random.randint(0,50)#for testing purpose as errors were generated
 
     def __repr__(self):
-        '''Representation of the chromosone structure'''
-        return (self.melody)
-
+        #Representation of the chromosone structure
+        return (str(self.melody))
+    
     def genMusic(self):
         '''Uses pysynth to play the music'''
         pass
@@ -50,7 +51,7 @@ class chromosome:
         commonOctaves = collections.Counter(octaves)
         mostCommonOctave = commonOctaves.most_common(1)
         # frequency of the most repeated octave is the fitness value
-        fitness += mostCommonOctave[1]
+        fitness += mostCommonOctave[0][1]
         return fitness
 
     def fitnessByInterval(self):
