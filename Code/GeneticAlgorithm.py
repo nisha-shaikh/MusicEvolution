@@ -45,12 +45,11 @@ def gen_chromosone():
 def Truncation(population, Sel):
     new= population.sort(key=lambda x: x.fitness, reverse=True)#Descending order
     if (Sel == "P"):  # parent selection
-        Parents = []
+        Parents = new[:2]
 
         return Parents
     elif (Sel == "S"):
-        Top_fit = []
-
+        Top_fit = new[:POP_SIZE]
         return Top_fit
     else:
         print("Selection is not identified")
