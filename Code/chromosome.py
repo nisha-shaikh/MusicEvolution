@@ -6,33 +6,67 @@ import collections
 
 
 class chromosome:
-
-    def __init__(self):
+    
+    
+    def __init__(self,newmelody):#R for random, else new melody
         '''Create a chromosone i.e melody'''
+        
         self.melody = []
+        
+        if (newmelody=="R"):
+            for _ in range(BEATS_PER_SECTION):
+                octave_idx = random.choice(OCTAVE_IDX)
+                note_idx = random.choice(NOTE_IDX)
 
-        for _ in range(BEATS_PER_SECTION):
-            octave_idx = random.choice(OCTAVE_IDX)
-            note_idx = random.choice(NOTE_IDX)
+                # which octave * size of octave  + note in that octave
+                abs_note = octave_idx * NUM_DIATONIC_REST + note_idx
+                duration = DEFAULT_DURATION
 
-            # which octave * size of octave  + note in that octave
-            abs_note = octave_idx * NUM_DIATONIC_REST + note_idx
-            duration = DEFAULT_DURATION
-
-            self.melody.append((note_idx, octave_idx, abs_note, duration))
-
+                self.melody.append((note_idx, octave_idx, abs_note, duration))
+        else:
+            self.melody=newmelody
+            
         self.chromoLength = len(self.melody)
         self.fitness = self.fitnessScore()
         #self.fitness=random.randint(0,50)#for testing purpose as errors were generated
-
+       
+    
     def __repr__(self):
         #Representation of the chromosone structure
         return (str(self.melody))
     
-    def genMusic(self):
+    def gen_bar(self):
+        octave_idx = random.choice(OCTAVE_IDX)
+        note_idx = random.choice(NOTE_IDX)
+        # which octave * size of octave  + note in that octave
+        abs_note = octave_idx * NUM_DIATONIC_REST + note_idx
+        duration = DEFAULT_DURATION
+        
+        return (note_idx, octave_idx, abs_note, duration)
+    
+    def genMusic(self,filename):
         '''Uses pysynth to play the music'''
-        pass
+        print("Save music file")
+    
+    def Crossover(self,chromo1):
+        #print("Crossover is working")
+        
+        crossover_idx = random.randrange(0, self.chromoLength)
 
+        first_child = self.melody[0:crossover_idx] + chromo1.melody[crossover_idx:]
+        second_child = chromo1.melody[0:crossover_idx] + self.melody[crossover_idx:]
+
+        Offsprings=(first_child,second_child)
+        
+        return Offsprings
+    
+    def mutate(self,rate):
+        #print("Mutate in chromo is working")
+        for j in range(0,self.chromoLength):#length of chromo,each bar
+            myRandom = round(random.uniform(0, 1), 2)  # rounded off to 2 dp
+            if (myRandom < rate):
+                self.melody[j]=self.gen_bar()
+                
     def fitnessScore(self):
         '''Based on some characteristics of music, fitness score of the entire melody is evaluated
         Higher fitness values denote better individuals'''
