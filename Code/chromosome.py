@@ -35,7 +35,7 @@ class chromosome:
         #Representation of the chromosone structure
         return (str(self.melody))
     
-    def gen_bar(self):
+    def gen_note(self):
         octave_idx = random.choice(OCTAVE_IDX)
         note_idx = random.choice(NOTE_IDX)
         # which octave * size of octave  + note in that octave
@@ -65,7 +65,7 @@ class chromosome:
         for j in range(0,self.chromoLength):#length of chromo,each bar
             myRandom = round(random.uniform(0, 1), 2)  # rounded off to 2 dp
             if (myRandom < rate):
-                self.melody[j]=self.gen_bar()
+                self.melody[j]=self.gen_note()
                 
     def fitnessScore(self):
         '''Based on some characteristics of music, fitness score of the entire melody is evaluated
