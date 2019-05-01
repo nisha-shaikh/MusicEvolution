@@ -18,14 +18,16 @@
 }
 
 \author{\IEEEauthorblockN{Nisha Shareef Shaikh}
-\IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
-\textit{name of organization (of Aff.)}\\
+\IEEEauthorblockA{\textit{BSc. Computer Science} \\
+\textit{Class of 2020}\\
+\textit{Habib University}\\
 Karachi, Pakistan \\
 ns02530@st.habib.edu.pk}
 \and
 \IEEEauthorblockN{Abeera Tariq}
-\IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
-\textit{name of organization (of Aff.)}\\
+\IEEEauthorblockA{\textit{BSc. Computer Science} \\
+\textit{Class of 2020}\\
+\textit{Habib University}\\
 Karachi, Pakistan \\
 at02787@st.habib.edu.pk}
 }
@@ -33,6 +35,8 @@ at02787@st.habib.edu.pk}
 \maketitle
 
 \begin{abstract}
+This paper has been generated as a report for a project in the course, Computational Intelligence. Using skills learned in this course, we have aimed to approach a novel scheme to produce music.
+
 *CRITICAL: Do Not Use Symbols, Special Characters, Footnotes, 
 or Math in Paper Title or Abstract.
 \end{abstract}
@@ -42,27 +46,34 @@ music, evolution, evolutionary algorithm
 \end{IEEEkeywords}
 
 \section{Introduction}
-Motivation, Novelty, How your paper is tackling it and what it does well\\
-\\
-Music composition involves innovation, creativity and sense of melody. Through this project, we hope to discover how music can be composed without the involvement of musicians. Taking motivation from the paper we presented for our first presentation, we will try to utilize our knowledge of evolutionary algorithms to compose melodies.
+Motivation, Novelty, How your paper is tackling it and what it does well
+
+Music composition involves innovation, creativity and sense of melody. Through this project, we hope to discover how music can be composed without the involvement of musicians. Taking motivation from the paper we presented for our first presentation, we will try to utilize our knowledge of evolutionary algorithms to compose melodies. 
 
 
 \section{Technical Background}
-Explain techniques used in the project\\\\
-Evolutionary Algorithms as inspired by the process of biological evolution are beneficial for optimization. Using concepts of reproduction, mutation, selection and recombination on candidate solutions (chromosomes), evolutionary algorithms (also called genetic algorithms) solve an optimization problem. Fitness function determines how good the candidate solution is and works by evolving the solutions to obtain the optimum solution to the problem.
+Explain techniques used in the project
+
+Th main technique used in this paper is the very first algorithm we studied for this course, "Evolutionary Algorithm". Evolutionary Algorithms as inspired by the process of biological evolution prove beneficial for optimization. Using concepts of reproduction, mutation, selection and recombination on candidate solutions (chromosomes), evolutionary algorithms (also called genetic algorithms) solve an optimization problem. A Fitness function determines how good the candidate solution is and works by evolving the solutions to obtain the optimum solution to the problem.
 
 
 \section{Related Work}
 
-How other people have done it, What problems they faced\\\\
+How other people have done it, What problems they faced
+
 Our presentation paper, 
 
 \section{Methodology}
-Our approach is to utilize the learning from this course regarding "Evolutionary Algorithms" to compose music. The chromosome for composing music is a melody itself which is represented as a list of 4-tuples defining a single note. For example, $(0, 4, 32, 4)$ where each index of a note represents an attribute as, \\
-Index 0:\\
-Index 1:\\
-Index 2:\\
-Index 3:\\\\
+Our approach is to utilize the learning from this course regarding "Evolutionary Algorithms" to compose music. \\
+
+\textbf{Chromosome structure:}
+
+The chromosome for composing music is a melody itself which is represented as a list of 4-tuples where each tuple defines a single note. For example, $(0, 4, 32, 4)$ where each index of a note represents an attribute as, \\
+Index 0: Note Index\\
+This defines...\\
+Index 1: Octave Index\\
+Index 2: Absolute Note\\
+Index 3: Duration\\
 
 \begin{center}
     [(0, 4, 32, 4), (6, 0, 6, 4), (4, 2, 20, 4), (6, 1, 14, 4),\\ (2, 1, 10, 4), (3, 1, 11, 4), (1, 3, 25, 4), (3, 4, 35, 4),\\ (5, 0, 5, 4), (0, 2, 16, 4), (7, 3, 31, 4), (2, 5, 42, 4),\\ (5, 3, 29, 4), (0, 2, 16, 4), (1, 5, 41, 4), (6, 0, 6, 4),\\ (7, 3, 31, 4), (7, 5, 47, 4), (5, 0, 5, 4), (0, 3, 24, 4),\\ (2, 3, 26, 4), (0, 5, 40, 4), (2, 5, 42, 4), (0, 1, 8, 4),\\ (3, 5, 43, 4), (4, 4, 36, 4), (5, 3, 29, 4), (5, 5, 45, 4),\\ (1, 1, 9, 4), (7, 3, 31, 4), (7, 4, 39, 4), (1, 1, 9, 4)]\\
@@ -70,18 +81,22 @@ Index 3:\\\\
     Representation of a single melody as a chromosome
 \end{center}
 
+We start by randomly generating notes to create random melodies which will comprise of our population. Furthermore selection schemes are applied to choose best fit parents and find the best chromosomes to survive in the next generation.\\
+The selection schemes used include,\\
+\textbf{Truncation:}\\
+\textbf{Binary Tournament:}\\
 
+\textbf{Crossover:}
 
+Crossover scheme for this algorithm involves choosing a random index in the range of the length of the melody. Each crossover leads to generate exactly 2 children. The first part of Offspring 1 is chosen from parent 1 and the second part is from parent 2. On the other hand, the first part of Offspring 2 is chosen from parent 2 and the second part is from parent 1. \\
 
+\textbf{Mutation:}
 
+Mutation scheme for this algorithm mutates based on a mutation rate. A random number is generated and if it lies within the set mutation rate, the chromosome is mutated. The process will produce a new note wherever mutation rate is met.
 
+\textbf{Evolutionary Algorithm:}
 
-
-
-
-
-
-
+Combining all techniques above, we evolved the population in search of finding the melody with the highest fitness. At the end of set $n$ generations, the population is sorted with respect to fitness and the highest fitness melody is stored as the best melody. However, listening to the music allowed us to judge how good the melody is, based on how good it sounds to the human ear. Therefore, judging fitness was not only restricted to a number.
 
 \section{Experiment and Results}
 How we tested\\
@@ -89,7 +104,9 @@ What benchmarks we used to evaluate results\\
 Dataset used\\
 Experiment settings\\
 Results and comparison if done\\
-Analysis of results (whether they are good; if they are bad, then in what situations are they bad)
+Analysis of results (whether they are good; if they are bad, then in what situations are they bad)\\
+
+We tested our algorithm with different sets of parameters. Controlling population size, mutation rate , selection schemes and number of generations, we tried to produce harmonious melodies. As expected, human interaction was necessary to identify good pieces of melody. At each moment that we made a change in parameters, we would stop and listen to the best melody generated at the end to listen and judge the melody.
 
 \section{Conclusion}
 Including future work
