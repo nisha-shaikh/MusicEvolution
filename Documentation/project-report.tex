@@ -91,12 +91,15 @@ The duration specifies the amount of time that the beat would play for. The dura
     Representation of a single melody as a chromosome
 \end{center}
 
-\subsection{Selection}
+\subsection{Selection Schemes}
 Selection schemes are applied to choose best fit parents and find the best chromosomes to survive in the next generation.\\
 The selection schemes used include binary tournament and truncation.\\
-\textbf{Truncation:}\\
 
-\textbf{Binary Tournament:}
+\textit{(a) Truncation}\\
+Truncation utilizes elitism to select the best fit individuals. For each crossover, 2 best fit individuals are selected while survivor selection is based on selecting best fit individuals of population size to be carried ahead to the next generation.\\
+
+\textit{(b) Binary Tournament}\\
+Binary Tournament 
 
 \subsection{Fitness Function}
 The fitness is evaluated based on several attributes of music.
