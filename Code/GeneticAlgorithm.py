@@ -32,8 +32,6 @@ def Initialise_Population(pop_size):
 
 # Sel signifies P or S selection where P is parent and S is survivor
 def Truncation(population, Sel):
-    #print("Truncation is working")
-
     new = sorted(population, key=lambda x: x.fitness,
                  reverse=True)  # Descending order
     if (Sel == "P"):  # parent selection
@@ -46,10 +44,36 @@ def Truncation(population, Sel):
         print("Selection is not identified")
 
 
+def BinaryTournament(population, sel):
+    '''
+    Select the fittest chromosome between 2 randomly selected chromosomes
+    '''
+    orig = population[:]
+    kill = False    # kill off least fit individuals if population is greater than POP_SIZE
+    fittest = []
+    if sel == 'S':
+        kill = True
+        loop = len(population) - POP_SIZE
+    elif sel == 'P':
+        loop = 2
+    for _ in range(loop) :
+        chosen = random.sample(orig, 2)
+        if not kill:
+            if chosen[0].fitness < chosen[1].fitness:
+                fittest.append(chosen[1])
+            else:
+                fittest.append(chosen[0])
+        else:
+            if chosen[0].fitness < chosen[1].fitness:
+                fittest.append(chosen[0])
+            else:
+                fittest.append(chosen[1])
+    return fittest
+
+
 def Mutate(population, rate):
     for i in range(0, len(population)):
         population[i].mutate(rate)
-    #print("Mutation is working")
     return population
 
 
@@ -63,14 +87,13 @@ def Evolve(population):
             best_melody = new[0]
             best_melody.genMusic("gen{}".format(gen))
 
-        parents = Truncation(population, "P")
+        # parents = Truncation(population, "P")
+        parents = BinaryTournament(population, 'P')
 
         offsprings = parents[0].crossover(parents[1])
 
         population.append(chromosome(offsprings[0]))
         population.append(chromosome(offsprings[1]))
-
-        # print(population[0].chromoLength)
 
         newpop = Mutate(population, MUTATION_RATE)
         next_gen = Truncation(newpop, "S")
@@ -80,10 +103,7 @@ def Evolve(population):
 
 def main():
     myMelodies = Initialise_Population(POP_SIZE)
-    # for iterations in range(0, ITER):
     myMelodies = Evolve(myMelodies)
-        # print("Iteration", iterations, "\nPopulation", myMelodies)
-    # print(len(myMelodies))
     new = sorted(myMelodies, key=lambda x: x.fitness, reverse=True)
     best_melody = new[0]
     best_melody.genMusic("Final")

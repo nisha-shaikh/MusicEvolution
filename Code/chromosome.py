@@ -68,8 +68,8 @@ class chromosome:
         '''Based on some characteristics of music, fitness score of the entire melody is evaluated
         Higher fitness values denote better individuals'''
         fitness = 0
-        fitness += self.fitnessByOctave()
-        fitness += self.fitnessByInterval()
+        fitness += 3*self.fitnessByOctave()
+        fitness += 2*self.fitnessByInterval()
         return fitness
 
     def fitnessByOctave(self):
@@ -100,10 +100,14 @@ class chromosome:
 
     def genMusic(self, filename):
         '''Uses pysynth to play the music'''
-        print("Save music file")
         tune = self.chromoToTune()
+        # newTune = self.joinSameNotes(tune)
         pysynth_b.make_wav(tune, fn='{}.wav'.format(
             filename), leg_stac=0.7, bpm=180)
+        # pysynth_b.make_wav(newTune, fn='{}.wav'.format(filename), leg_stac=0.7, bpm=180)
+        # if filename == 'Final':
+        #     pysynth_b.make_wav(tune, fn='{}_orig.wav'.format(
+        #         filename), leg_stac=0.7, bpm=180)
 
     def chromoToTune(self):
         '''Converts chromosome in a better representaiton of music that PySynth can recognize'''
@@ -121,3 +125,23 @@ class chromosome:
             # PySynth makes music by reading a tuple of note and its durationa
             convertedTune.append((note, duration))
         return tuple(convertedTune)
+
+    # def joinSameNotes(self, origTune):
+    #     '''Joins successive same notes'''
+    #     newTune = []
+    #     skip = False
+    #     for i in range(0, len(origTune) - 1):
+    #         if skip:
+    #             skip = False
+    #             continue
+    #         c_note = origTune[i][0]
+    #         n_note = origTune[i+1][0]
+    #         c_duration = origTune[i][1]
+    #         if c_note == n_note:
+    #             dur = 2 if c_duration > 2 else 1
+    #             newTune.append((c_note, dur))
+    #             skip = True
+    #         else:
+    #             newTune.append((c_note,c_duration))
+
+    #     return tuple(newTune)
