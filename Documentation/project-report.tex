@@ -61,7 +61,8 @@ From this population, certain chromosomes are selected for reproduction on the b
 
 This process of reproduction, mutation and selection will keep repeating until the criteria of termination have been fulfilled.
 
-Before we proceed, it is important to understand some terms in music.\\
+Before we proceed, it is important to understand some terms in music.
+
 \subsection{Note}
 
 \subsection{Octave}
@@ -70,9 +71,9 @@ Before we proceed, it is important to understand some terms in music.\\
 
 \section{Related Work}
 %How other people have done it, What problems they faced
-The inspiration to our study is the paper $[1]$ \textit{"A Genetic Algorithm For Composing Music" by Dragan MATIĆ} which exposed us to intelligent music composition for the first time. The paper develops on composing melodies in comparison to a reference melody. With a different mechanism involved for constructing a melody, the idea of composition in this paper is restricted to a similarity value of a chromosome with respect to a reference melody. The similarity is calculated based on a defined \textit{"distance"} of an individual with the reference one. \\
+The inspiration to our study is \textit{"A Genetic Algorithm For Composing Music" by Dragan Matic} \cite{b1} which exposed us to intelligent music composition for the first time. The paper elaborates on composing melodies based on a reference melody. With a different mechanism involved for constructing a melody, the idea of composition in this paper is restricted to a similarity value of a chromosome with respect to a reference melody. The similarity is calculated based on a defined \textit{``distance"} of an individual with the reference one.
 
-The implementation of genetic algorithm is based on simply \textit{mutation} where each generation is only mutated to evolve and compose better pieces of music. The algorithm utilizes 3 different ways to mutate the chromosomes. An interesting mechanism of selection is utilized called, \textit{elimination selection} whereby all individuals of low fitness are removed and all duplicates (individuals of the same fitness) are also removed. Therefore, at each iteration, the population consists of individuals with distinct fitness. Experimentation and results of this study proved fruitful as it resulted in beautiful composition as claimed by the researcher. Although, the algorithm leaves possible room for controlling parameters, the existence of a reference melody assists in producing more rhythmic and harmonious music. Algorithm is designed in such a way as to incorporate mathematical functions that evaluate fitness based on other parameters. \\
+The implementation of genetic algorithm is based on simply \textit{mutation} where each generation is only mutated to evolve and compose better pieces of music. The algorithm utilizes 3 different ways to mutate the chromosomes. An interesting mechanism of selection is utilized called \textit{elimination selection} whereby all individuals of low fitness are removed and all duplicates (individuals of the same fitness) are also removed. Therefore, at each iteration, the population consists of individuals with distinct fitness. Experimentation and results of this study proved fruitful as it resulted in a beautiful composition as claimed by the researcher. Although the algorithm leaves possible room for controlling parameters, the existence of a reference melody assists in producing more rhythmic and harmonious music. The algorithm is designed in such a way so as to incorporate mathematical functions that evaluate fitness based on other parameters.
 
 Gaining inspiration from this algorithm, we have attempted to use some mathematical functions to determine fitness of the melodies which will be discussed ahead in this paper.
 
@@ -141,7 +142,7 @@ Crossover scheme for this algorithm involves choosing a random index in the rang
 Mutation scheme for this algorithm works based on a mutation rate. A random number is generated and if it lies within the set mutation rate, the chromosome is mutated. However, the entire chromosome is not changed. For every beat in the chromosome, a random number is generated and if it is less than the mutation rate, a new beat will be produced.
 
 \subsection{Evolutionary Algorithm}
-Combining all techniques above, we evolved the population in search of finding the melody with the highest fitness. At the end of set $n$ generations, the population is sorted with respect to fitness and the highest fitness melody is stored as the best melody. However, listening to the music allowed us to judge how good the melody is, based on how good it sounds to the human ear. Although, our algorithm was not "interactive composition" algorithm, this allowed us to adjust the multipliers for the fitness function to produce better music. This was done during the experimentation process to find the best combination of paramters and fitness multipliers.
+Combining all techniques above, we evolved the population to find the melody with the highest fitness. At the end of the set $n$ generations, the population is sorted with respect to fitness and the highest fitness melody is stored as the best melody. However, listening to the music allowed us to judge how good the melody is based on how good it sounds to the human ear. Although our algorithm was not an "interactive composition" algorithm, this allowed us to adjust the multipliers for the fitness function to produce better music. This was done during the experimentation process to find the best combination of paramters and fitness multipliers.
 
 \subsection{Generating Music Files Using PySynth}
 We used a library ``PySynth B" to produce music files. The chromosome structure is treated such that the melody is turned into a ``.wav" file which is playable by any music player. Its method ``make\_wav" takes a tuple of 2-tuples that describe the melody. The first value of the 2-tuple describes the note and its octave, and the second value describes the duration of the beat. Hence, for PySynth B, the 2-tuple (`c5', 4) denotes a $C5$ beat that plays for a quarter of a second.
@@ -159,18 +160,16 @@ We tested our algorithm with different sets of parameters. Controlling populatio
 After experimentation with different parameters, we set the population size to 50, mutation rate to 0.6, selection rate to 0.8, offspring size to 10 and generations to 5000. We started with a low mutation rate, offspring size and generations and only using the truncation selection scheme, but the fitness value of the population did not change too much and the melody produced at the end wasn't too pleasing to hear. We tweaked these parameters until the melody at the end was much better. We used the binary tournament selection scheme to select the parents and truncation for only selecting the new generation, and our results vastly improved.
 
 \section{Conclusion}
-The study was limited by human interactions. We were bound to listen to the music besides simply trusting the fitness function. This however breaks the complete dependence on the computer in generating music and involves a human brain to pass judgment. A melodious tune may not be rightly identified by the genetic algorithm but we have gotten close to achieve a harmonious melody at the end of our study. Since we have built up on other works on this topic, we believe that a mathematician who has worked deeply on music's relation to mathematics can help to find a better fitness function. There is a room for improvement in this search and we believe it is achievable to remove human dependence in the innovative and creative task of music composition.
+The study was limited by human interaction. We were bound to listen to the music besides simply trusting the fitness function. This breaks complete dependence on the computer for generating music and involves the human brain to pass judgment. A melodious tune may not be rightly identified by the genetic algorithm, but we have gotten close to achieving a harmonious melody at the end of our study. Since we have built up on other works on this topic, we believe that a mathematician who has worked deeply on music's relation to mathematics can help find a better fitness function. There is room for improvement in this search and we believe it is possible to remove human dependence in the innovative and creative task of music composition.
 
 \section*{Acknowledgment}
-What resources we have used and who has helped us
+We thank Dr. Syeda Saleha Raza 
 
 
 \begin{thebibliography}{00}
 \bibitem{b1} D. Matic, ``A genetic algorithm for composing music," \textit{Yugoslav Journal of Operations Research}, vol. 20, no. 1, pp. 157-177, 2010. Available: 10.2298/yjor1001157m [Accessed 19 April 2019].
 \bibitem{b2}V. Anderling, O. Andreasson, C. Olsson, S. Pavlov, C. Svensson, and J. Wikner, ``Generation of music through genetic algorithms," 2014.
 \bibitem{b3}G. Papadopoulos and G. Wiggins, ``A Genetic Algorithm for the Generation of Jazz Melodies," 2000
-\bibitem{b4} Z. Geem and J. Choi, ``Music Composition Using Harmony Search Algorithm", \textit{Lecture Notes in Computer Science}, pp. 593-600. Available: 10.1007/978-3-540-71805-5\_65 [Accessed 19 April 2019].
-\bibitem{b5} A. Freitas, F. Guimarães and R. Barbosa, ``Automatic Evaluation Methods in Evolutionary Music: An Example with Bossa Melodies", \textit{Lecture Notes in Computer Science}, pp. 458-467, 2012. Available: 10.1007/978-3-642-32964-7\_46 [Accessed 19 April 2019].
 \end{thebibliography}
 
 \end{document}
