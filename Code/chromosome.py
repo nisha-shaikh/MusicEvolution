@@ -1,4 +1,4 @@
-from constants import OCTAVE_IDX, NOTE_IDX, NUM_DIATONIC_REST, DEFAULT_DURATION, BEATS_PER_SECTION, DIATONIC_REST, OCTAVES
+from constants import *
 import random
 import collections
 import pysynth_b
@@ -53,6 +53,7 @@ class chromosome:
         fitness += 3*self.fitnessByOctave()
         fitness += 2*self.fitnessByInterval()
         fitness += 2*self.fitnessByVariation()
+        fitness += self.fitnessByDownBeat()
         return fitness
 
     def fitnessByOctave(self):
@@ -96,6 +97,18 @@ class chromosome:
             dec = all(x >= y for x, y in zip(succNotes, succNotes[1:]))
             if inc or dec:
                 fitness += 1
+        return fitness
+    
+    def fitnessByDownBeat(self):
+        '''
+        Higher fitness if more bars start with the major diatonic triad notes (C, E, or G)
+        '''
+        fitness = 0
+        for i in range(0, BEATS_PER_SECTION, BARS_PER_SECTION):
+            note_idx = self.melody[i][0]
+            note = DIATONIC_REST[note_idx]
+            if note in CHORD_NOTES:
+                fitness += BEATS_PER_BAR
         return fitness
 
     def crossover(self, chromo1):
