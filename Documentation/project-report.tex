@@ -66,7 +66,7 @@ This process of reproduction, mutation and selection will keep repeating until t
 Our presentation paper, 
 
 \section{Methodology}
-Our approach is to utilize the learning of genetic algorithm to compose music.
+Our approach is to utilize our learning of genetic algorithm to compose music. We start by randomly generating notes to create random melodies, which will comprise our population.
 
 \subsection{Chromosome Structure}
 The chromosome for a melody is represented as a list of 4-tuples, where each tuple defines a single beat. For example, a beat may be represented as $(0, 4, 32, 4)$, where each index is defined as follows
@@ -91,8 +91,9 @@ The duration specifies the amount of time that the beat would play for. The dura
     Representation of a single melody as a chromosome
 \end{center}
 
-We start by randomly generating notes to create random melodies which will comprise of our population. Furthermore selection schemes are applied to choose best fit parents and find the best chromosomes to survive in the next generation.\\
-The selection schemes used include,\\
+\subsection{Selection}
+Selection schemes are applied to choose best fit parents and find the best chromosomes to survive in the next generation.\\
+The selection schemes used include binary tournament and truncation.
 \textbf{Truncation:}\\
 \textbf{Binary Tournament:}
 
