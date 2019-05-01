@@ -70,7 +70,11 @@ Before we proceed, it is important to understand some terms in music.\\
 
 \section{Related Work}
 %How other people have done it, What problems they faced
-Our presentation paper, 
+The inspiration to our study is the paper $[1]$ \textit{"A Genetic Algorithm For Composing Music" by Dragan MATIĆ} which exposed us to intelligent music composition for the first time. The paper develops on composing melodies in comparison to a reference melody. With a different mechanism involved for constructing a melody, the idea of composition in this paper is restricted to a similarity value of a chromosome with respect to a reference melody. The similarity is calculated based on a defined \textit{"distance"} of an individual with the reference one. \\
+
+The implementation of genetic algorithm is based on simply \textit{mutation} where each generation is only mutated to evolve and compose better pieces of music. The algorithm utilizes 3 different ways to mutate the chromosomes. An interesting mechanism of selection is utilized called, \textit{elimination selection} whereby all individuals of low fitness are removed and all duplicates (individuals of the same fitness) are also removed. Therefore, at each iteration, the population consists of individuals with distinct fitness. Experimentation and results of this study proved fruitful as it resulted in beautiful composition as claimed by the researcher. Although, the algorithm leaves possible room for controlling parameters, the existence of a reference melody assists in producing more rhythmic and harmonious music. Algorithm is designed in such a way as to incorporate mathematical functions that evaluate fitness based on other parameters. \\
+
+Gaining inspiration from this algorithm, we have attempted to use some mathematical functions to determine fitness of the melodies which will be discussed ahead in this paper.
 
 \section{Methodology}
 Our approach is to utilize our learning of genetic algorithm to compose music. We start by randomly generating notes to create random melodies, which will comprise our population. These melodies will then go through the reproduction, mutation and selection processes for a certain number of generations.
@@ -137,7 +141,7 @@ Crossover scheme for this algorithm involves choosing a random index in the rang
 Mutation scheme for this algorithm works based on a mutation rate. A random number is generated and if it lies within the set mutation rate, the chromosome is mutated. However, the entire chromosome is not changed. For every beat in the chromosome, a random number is generated and if it is less than the mutation rate, a new beat will be produced.
 
 \subsection{Evolutionary Algorithm}
-Combining all techniques above, we evolved the population in search of finding the melody with the highest fitness. At the end of set $n$ generations, the population is sorted with respect to fitness and the highest fitness melody is stored as the best melody. However, listening to the music allowed us to judge how good the melody is, based on how good it sounds to the human ear. Therefore, judging fitness was not only restricted to a number.
+Combining all techniques above, we evolved the population in search of finding the melody with the highest fitness. At the end of set $n$ generations, the population is sorted with respect to fitness and the highest fitness melody is stored as the best melody. However, listening to the music allowed us to judge how good the melody is, based on how good it sounds to the human ear. Although, our algorithm was not "interactive composition" algorithm, this allowed us to adjust the multipliers for the fitness function to produce better music. This was done during the experimentation process to find the best combination of paramters and fitness multipliers.
 
 \subsection{Generating Music Files Using PySynth}
 We used a library ``PySynth B" to produce music files. The chromosome structure is treated such that the melody is turned into a ``.wav" file which is playable by any music player. Its method ``make\_wav" takes a tuple of 2-tuples that describe the melody. The first value of the 2-tuple describes the note and its octave, and the second value describes the duration of the beat. Hence, for PySynth B, the 2-tuple (`c5', 4) denotes a $C5$ beat that plays for a quarter of a second.
