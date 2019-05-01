@@ -1,72 +1,69 @@
 # Chromosone
 
-from constants import OCTAVE_IDX, NOTE_IDX, NUM_DIATONIC_REST, DEFAULT_DURATION, BEATS_PER_SECTION
+from constants import OCTAVE_IDX, NOTE_IDX, NUM_DIATONIC_REST, DEFAULT_DURATION, BEATS_PER_SECTION, DIATONIC_REST, OCTAVES
 import random
 import collections
+import pysynth_b
 
 
 class chromosome:
-    
-    
-    def __init__(self,newmelody):#R for random, else new melody
-        '''Create a chromosone i.e melody'''
-        
+
+    def __init__(self, newMelody):  # R for random, else new melody
+        '''Create a chromosone i.e. melody'''
+
         self.melody = []
-        
-        if (newmelody=="R"):
+
+        if (newMelody == "R"):
             for _ in range(BEATS_PER_SECTION):
                 octave_idx = random.choice(OCTAVE_IDX)
                 note_idx = random.choice(NOTE_IDX)
 
-                # which octave * size of octave  + note in that octave
+                # which octave (from C2 to C7) * amount of notes per octave + note in that octave
                 abs_note = octave_idx * NUM_DIATONIC_REST + note_idx
                 duration = DEFAULT_DURATION
 
                 self.melody.append((note_idx, octave_idx, abs_note, duration))
         else:
-            self.melody=newmelody
-            
+            self.melody = newMelody
+
         self.chromoLength = len(self.melody)
         self.fitness = self.fitnessScore()
-        #self.fitness=random.randint(0,50)#for testing purpose as errors were generated
-       
-    
+        # self.fitness=random.randint(0,50)#for testing purpose as errors were generated
+
     def __repr__(self):
-        #Representation of the chromosone structure
+        # Representation of the chromosone structure
         return (str(self.melody))
-    
+
     def gen_note(self):
         octave_idx = random.choice(OCTAVE_IDX)
         note_idx = random.choice(NOTE_IDX)
-        # which octave * size of octave  + note in that octave
         abs_note = octave_idx * NUM_DIATONIC_REST + note_idx
         duration = DEFAULT_DURATION
-        
+
         return (note_idx, octave_idx, abs_note, duration)
-    
-    def genMusic(self,filename):
-        '''Uses pysynth to play the music'''
-        print("Save music file")
-    
-    def Crossover(self,chromo1):
+
+    def crossover(self, chromo1):
         #print("Crossover is working")
-        
+
         crossover_idx = random.randrange(0, self.chromoLength)
 
-        first_child = self.melody[0:crossover_idx] + chromo1.melody[crossover_idx:]
-        second_child = chromo1.melody[0:crossover_idx] + self.melody[crossover_idx:]
+        first_child = self.melody[0:crossover_idx] + \
+            chromo1.melody[crossover_idx:]
+        second_child = chromo1.melody[0:crossover_idx] + \
+            self.melody[crossover_idx:]
 
-        Offsprings=(first_child,second_child)
-        
-        return Offsprings
-    
-    def mutate(self,rate):
+        offsprings = (first_child, second_child)
+
+        return offsprings
+
+    def mutate(self, rate):
         #print("Mutate in chromo is working")
-        for j in range(0,self.chromoLength):#length of chromo,each bar
+        for j in range(0, self.chromoLength):  # all beats in the melody
             myRandom = round(random.uniform(0, 1), 2)  # rounded off to 2 dp
             if (myRandom < rate):
-                self.melody[j]=self.gen_note()
-                
+                self.melody[j] = self.gen_note()
+        self.fitness = self.fitnessScore()
+
     def fitnessScore(self):
         '''Based on some characteristics of music, fitness score of the entire melody is evaluated
         Higher fitness values denote better individuals'''
@@ -95,7 +92,32 @@ class chromosome:
         abs_note_idx = 2
         for i in range(self.chromoLength-1):
             # interval is calculated for every successive note (which is stored as abs_note in self.melody)
-            interval = abs(self.melody[i][abs_note_idx] - self.melody[i+1][abs_note_idx])
+            interval = abs(self.melody[i][abs_note_idx] -
+                           self.melody[i+1][abs_note_idx])
             if interval <= 4:
                 fitness += 1
         return fitness
+
+    def genMusic(self, filename):
+        '''Uses pysynth to play the music'''
+        print("Save music file")
+        tune = self.chromoToTune()
+        pysynth_b.make_wav(tune, fn='{}.wav'.format(
+            filename), leg_stac=0.7, bpm=180)
+
+    def chromoToTune(self):
+        '''Converts chromosome in a better representaiton of music that PySynth can recognize'''
+        convertedTune = []
+        for i in range(self.chromoLength):
+            # gives the note ('cdefgabr') referenced by note_idx
+            letter = DIATONIC_REST[self.melody[i][0]]
+            # gives the octave of the note referenced by octave_idx
+            octave = OCTAVES[self.melody[i][1]]
+            if letter == 'r':
+                octave = ''
+            # PySynth reads note and its octave together
+            note = str(letter) + str(octave)
+            duration = self.melody[i][3]
+            # PySynth makes music by reading a tuple of note and its durationa
+            convertedTune.append((note, duration))
+        return tuple(convertedTune)
