@@ -1,7 +1,7 @@
 # Genetic Algorithm for Music Composition
 
 from chromosome import chromosome
-from constants import GENERATIONS, MUTATION_RATE, POP_SIZE, OFFSPRING
+from constants import GENERATIONS, MUTATION_RATE, POP_SIZE, OFFSPRING, SELECTION_RATE
 import random
 
 # Take user inputs to allow controlling parameters--TESTING PURPOSE ONLY.
@@ -26,8 +26,9 @@ def Initialise_Population(pop_size):
 
 # SELECTION SCHEME
 # As a learning outcome from Assignment 01,
-# we have concluded that Eliticism works best hence, the selected selection scheme for this algorithm is,
-# Parent Selection : Truncation
+# we have concluded that binary tournament and truncation work best together
+# The selected selection scheme for this algorithm is,
+# Parent Selection : Binary Tournament
 # Survivor Selection: Truncation
 
 # Sel signifies P or S selection where P is parent and S is survivor
@@ -58,13 +59,14 @@ def BinaryTournament(population, sel):
         loop = 2
     for _ in range(loop) :
         chosen = random.sample(orig, 2)
+        chance = round(random.uniform(0,1), 2)
         if not kill:
-            if chosen[0].fitness < chosen[1].fitness:
+            if chosen[0].fitness < chosen[1].fitness and chance < SELECTION_RATE:
                 fittest.append(chosen[1])
             else:
                 fittest.append(chosen[0])
         else:
-            if chosen[0].fitness < chosen[1].fitness:
+            if chosen[0].fitness < chosen[1].fitness and chance < SELECTION_RATE:
                 fittest.append(chosen[0])
             else:
                 fittest.append(chosen[1])

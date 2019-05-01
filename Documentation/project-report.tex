@@ -45,9 +45,9 @@ music, evolution, genetic algorithm
 
 \section{Introduction}
 %Motivation, Novelty, How your paper is tackling it and what it does well
-Music composition involves innovation, creativity and a sense of melody. Through this project, we hope to discover how music can be composed without the involvement of musicians. Taking motivation from \cite{b1}, we will try to utilize our knowledge of genetic algorithms to compose melodies.
+Algorithms in music are used for sound synthesis, sampling, recognition of musical works and for music composition. Music composition involves innovation, creativity and a sense of melody. Through this project, we hope to discover how music can be composed without the involvement of musicians. Taking motivation from \cite{b1}, we will try to utilize our knowledge of genetic algorithms to compose melodies.
 
-Composing music is thought to be a process that can't work without human involvement due to the subjective nature of the task. However, since genetic algorithms mimic nature, they are believed to be a suitable approach to eliminate human involvement.
+Composing music is thought to be a process that can't work without human involvement due to the subjective nature of the task as an artist composes music as a means to express their feelings, emotions and inspiration. It is believed that music is composed as a result of free choice of existing rules. This implies that the process of composition can be broken down to a set of instructions, so composition may be considered an algorithm in some way. Since genetic algorithms are capable of mimicking  nature, they are believed to be a suitable approach to eliminate human involvement. However, the lack of human factor may lead to large amounts of objectively bad and useless music.
 
 With the genetic algorithm we implemented, melodies will be represented as a list of integers that describe each beat's note, octave and duration. The algorithm will start with a group of random compositions created with random parameters to describe each beat. This group will be evolved with the algorithm to continuously improve the compositions and get a pleasant-sounding piece at the end.
 
@@ -66,7 +66,7 @@ This process of reproduction, mutation and selection will keep repeating until t
 Our presentation paper, 
 
 \section{Methodology}
-Our approach is to utilize our learning of genetic algorithm to compose music. We start by randomly generating notes to create random melodies, which will comprise our population.
+Our approach is to utilize our learning of genetic algorithm to compose music. We start by randomly generating notes to create random melodies, which will comprise our population. These melodies will then go through the reproduction, mutation and selection processes for a certain number of generations.
 
 \subsection{Chromosome Structure}
 The chromosome for a melody is represented as a list of 4-tuples, where each tuple defines a single beat. For example, a beat may be represented as $(0, 4, 32, 4)$, where each index is defined as follows
@@ -92,17 +92,36 @@ The duration specifies the amount of time that the beat would play for. The dura
 \end{center}
 
 \subsection{Selection Schemes}
-Selection schemes are applied to choose best fit parents and find the best chromosomes to survive in the next generation.\\
-The selection schemes used include binary tournament and truncation.\\
+Selection schemes are applied to choose the fittest parents and find the best solutions to survive in the next generation. The selection schemes used include binary tournament and truncation.
 
-\textit{(a) Truncation}\\
-Truncation utilizes elitism to select the best fit individuals. For each crossover, 2 best fit individuals are selected while survivor selection is based on selecting best fit individuals of population size to be carried ahead to the next generation.\\
+%\textit{1. Binary Tournament}
+\subsubsection{Binary Tournament}
+Binary tournament involves randomly selecting two chromosomes and choosing the fittest of the two according to a pre-determined selection probability. A random number is generated and if the number is lower than or equal to the selection probability, the fitter individual is chosen or else the weaker one is chosen. The binary tournament process is run for as many times as the number of chromosomes to be selected.
 
-\textit{(b) Binary Tournament}\\
-Binary Tournament 
+%\textit{2. Truncation}
+\subsubsection{Truncation}
+Truncation selection chooses the top $k$ fittest chromosomes, where $k$ is the number of chromosomes that have to be selected. For each crossover, 2 fittest chromosomes are selected, while for survivor selection, $k$ is equal to the population size to select chromosomes that will be carried over to the next generation.
 
 \subsection{Fitness Function}
-The fitness is evaluated based on several attributes of music.
+The fitness is evaluated based on several weighted attributes of music. The general formula for evaluating the fitness $f$ is
+\begin{align*}
+f &= \sum_{i=1}^{n} \lambda_{i}f_{i}
+\end{align*}
+where $f_{i}$ is the musical attribute being used, $\lambda_{i}$ is the weight of the attribute and $n$ is the total number of attributes used.
+
+Following are the attributes we used:
+
+\subsubsection{Octave}
+A composition sounds more pleasant if the pitch values of its notes are relatively close to each other \cite{b2}. Pitch and octave are similar in that they both denote the frequency of the note. Hence, to make sure the pitches are close to each other, we favored chromosomes that have more beats with the same octave.
+
+\subsubsection{Interval}
+
+
+\subsubsection{Variation}
+
+
+\subsubsection{Down Beat}
+
 
 \subsection{Crossover}
 Crossover scheme for this algorithm involves choosing a random index in the range of the length of the melody. Each crossover leads to generate exactly 2 children. The first part of Offspring 1 is chosen from parent 1 and the second part is from parent 2. On the other hand, the first part of Offspring 2 is chosen from parent 2 and the second part is from parent 1. \\
@@ -135,8 +154,9 @@ What resources we have used and who has helped us
 
 \begin{thebibliography}{00}
 \bibitem{b1} D. Matic, "A genetic algorithm for composing music", \textit{Yugoslav Journal of Operations Research}, vol. 20, no. 1, pp. 157-177, 2010. Available: 10.2298/yjor1001157m [Accessed 19 April 2019].
-\bibitem{b2} Z. Geem and J. Choi, "Music Composition Using Harmony Search Algorithm", \textit{Lecture Notes in Computer Science}, pp. 593-600. Available: 10.1007/978-3-540-71805-5\_65 [Accessed 19 April 2019].
-\bibitem{b3} A. Freitas, F. Guimarães and R. Barbosa, "Automatic Evaluation Methods in Evolutionary Music: An Example with Bossa Melodies", \textit{Lecture Notes in Computer Science}, pp. 458-467, 2012. Available: 10.1007/978-3-642-32964-7\_46 [Accessed 19 April 2019].
+\bibitem{b2}V. Anderling, O. Andreasson, C. Olsson, S. Pavlov, C. Svensson, and J. Wikner, "Generation of music through genetic algorithms," 2014.
+\bibitem{b3} Z. Geem and J. Choi, "Music Composition Using Harmony Search Algorithm", \textit{Lecture Notes in Computer Science}, pp. 593-600. Available: 10.1007/978-3-540-71805-5\_65 [Accessed 19 April 2019].
+\bibitem{b4} A. Freitas, F. Guimarães and R. Barbosa, "Automatic Evaluation Methods in Evolutionary Music: An Example with Bossa Melodies", \textit{Lecture Notes in Computer Science}, pp. 458-467, 2012. Available: 10.1007/978-3-642-32964-7\_46 [Accessed 19 April 2019].
 \end{thebibliography}
 
 \end{document}
