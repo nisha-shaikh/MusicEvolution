@@ -1,7 +1,7 @@
 # Genetic Algorithm for Music Composition
 
 from chromosome import chromosome
-from constants import GENERATIONS, MUTATION_RATE, POP_SIZE
+from constants import GENERATIONS, MUTATION_RATE, POP_SIZE, OFFSPRING
 import random
 
 # Take user inputs to allow controlling parameters--TESTING PURPOSE ONLY.
@@ -79,21 +79,21 @@ def Mutate(population, rate):
 
 def Evolve(population):
     for gen in range(0, GENERATIONS):
-        print("Generation: ", gen)
-
-        if (gen % 20 == 0):
-            # To record the best melody after every 20 gen
+        if (gen < 1000 and gen % 100 == 0) or (gen >= 1000 and gen % 1000 == 0):
+            # To record the best melody 
             new = sorted(population, key=lambda x: x.fitness, reverse=True)
             best_melody = new[0]
+            print("Generation: {},        Fitness:{}".format(gen, best_melody.fitness))
             best_melody.genMusic("gen{}".format(gen))
 
         # parents = Truncation(population, "P")
-        parents = BinaryTournament(population, 'P')
+        for _ in range(OFFSPRING):
+            parents = BinaryTournament(population, 'P')
 
-        offsprings = parents[0].crossover(parents[1])
+            offsprings = parents[0].crossover(parents[1])
 
-        population.append(chromosome(offsprings[0]))
-        population.append(chromosome(offsprings[1]))
+            population.append(chromosome(offsprings[0]))
+            population.append(chromosome(offsprings[1]))
 
         newpop = Mutate(population, MUTATION_RATE)
         next_gen = Truncation(newpop, "S")
@@ -106,6 +106,7 @@ def main():
     myMelodies = Evolve(myMelodies)
     new = sorted(myMelodies, key=lambda x: x.fitness, reverse=True)
     best_melody = new[0]
+    print("Final fitness: {}".format(best_melody.fitness))
     best_melody.genMusic("Final")
 
 
