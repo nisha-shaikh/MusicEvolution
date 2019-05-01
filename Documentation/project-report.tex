@@ -135,8 +135,10 @@ This function evaluates the amount of changes in pitch direction \cite{b2}. Freq
 \subsubsection{Down Beat}
 Down beat is the first beat in a bar and is usually the most significant one. Chord notes (which are $C, E$ and $G$ in our case) sound better as the down beat, so compositions with a higher number of bars with a chord note as the down beat will be given a better fitness score.
 
+\begin{figure}
 \includegraphics[width=10 cm, height= 10 cm ]{Flowchart.png}
-\caption{Figure 1: Flowchart of the Genetic Algorithm for Music Composition}
+\caption{ Flowchart of the Genetic Algorithm for Music Composition}
+\end{figure}
 
 \subsection{Crossover}
 Crossover scheme for this algorithm involves choosing a random index in the range of the length of the melody. Each crossover leads to exactly 2 children. The first part of offspring 1 is chosen from parent 1 and the second part from parent 2. On the other hand, the first part of offspring 2 is chosen from parent 2 and the second part from parent 1.
@@ -160,15 +162,14 @@ We used a library ``PySynth B" to produce music files. The chromosome structure 
 %Analysis of results (whether they are good; if they are bad, then in what situations are they bad)\\
 We tested our algorithm with different sets of parameters. Controlling population size, mutation rate , selection schemes, offspring size and number of generations, we tried to produce harmonious melodies. As expected, human interaction was necessary to identify good pieces of melody. At each moment that we made a change in parameters, we would stop and listen to the best melody generated at the end to judge how well the algorithm is working.
 
-After experimentation with different parameters, we set the following parameters:
-\begin{center}
-population size$=50$,\\
-mutation rate = $0.6$,\\
-selection rate = $0.8$,\\
-offspring size= $10$\\
-generations= $5000$.\\
-\end{center}
-
+After experimentation with different parameter values, we set the following parameters:
+\begin{align*}
+\text{Population size}=50\\
+\text{Mutation rate} = 0.6\\
+\text{Selection rate} = 0.8\\
+\text{Offspring size}= 10\\
+\text{Generations}= 5000\\
+\end{align*}
 
 We started with a low mutation rate, offspring size and generations and only using the truncation selection scheme, but the fitness value of the population did not change too much and the melody produced at the end wasn't too pleasing to hear. We tweaked these parameters until the melody at the end was much better. We used the binary tournament selection scheme to select the parents and truncation for only selecting the new generation, and our results vastly improved.
 
