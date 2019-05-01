@@ -79,7 +79,7 @@ class chromosome:
         fitness = 0
         abs_note_idx = 2
         for i in range(self.chromoLength-1):
-            # interval is calculated for every successive note (which is stored as abs_note in self.melody)
+            # interval is calculated for every successive note
             interval = abs(self.melody[i][abs_note_idx] -
                            self.melody[i+1][abs_note_idx])
             if interval <= 4:
