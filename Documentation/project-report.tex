@@ -93,8 +93,9 @@ The duration specifies the amount of time that the beat would play for. The dura
 
 \subsection{Selection}
 Selection schemes are applied to choose best fit parents and find the best chromosomes to survive in the next generation.\\
-The selection schemes used include binary tournament and truncation.
+The selection schemes used include binary tournament and truncation.\\
 \textbf{Truncation:}\\
+
 \textbf{Binary Tournament:}
 
 \subsection{Fitness Function}
@@ -109,6 +110,10 @@ Mutation scheme for this algorithm mutates based on a mutation rate. A random nu
 \subsection{Evolutionary Algorithm}
 Combining all techniques above, we evolved the population in search of finding the melody with the highest fitness. At the end of set $n$ generations, the population is sorted with respect to fitness and the highest fitness melody is stored as the best melody. However, listening to the music allowed us to judge how good the melody is, based on how good it sounds to the human ear. Therefore, judging fitness was not only restricted to a number.
 
+\subsection{Generating music files using PySynth}
+We used a library "PySynth" to produce music files. The chromosome structure is treated such that the melody is turned into a ".wav" file which is playable by any music player.
+
+
 \section{Experiment and Results}
 %How we tested\\
 %What benchmarks we used to evaluate results\\
@@ -119,7 +124,7 @@ Combining all techniques above, we evolved the population in search of finding t
 We tested our algorithm with different sets of parameters. Controlling population size, mutation rate , selection schemes and number of generations, we tried to produce harmonious melodies. As expected, human interaction was necessary to identify good pieces of melody. At each moment that we made a change in parameters, we would stop and listen to the best melody generated at the end to listen and judge the melody.
 
 \section{Conclusion}
-The study was limited by human interactions. We were bound to listen to the music besides simply trusting the fitness function. This however breaks the complete dependence on the computer in generating music and involves a human brain to pass judgement. A melodious tune may not be rightly identified by the genetic algorithm but we have gotten close to achieve a harmonious melody at the end of our study. Since we have built up on other works on this topic, we believe that a mathematician who has worked deeply on music's relation to mathematics can help to find a better fitness function. There is a room for improvement in this search and we believe it is achievable to remove human dependence in the innovative and creative task of music composition.
+The study was limited by human interactions. We were bound to listen to the music besides simply trusting the fitness function. This however breaks the complete dependence on the computer in generating music and involves a human brain to pass judgment. A melodious tune may not be rightly identified by the genetic algorithm but we have gotten close to achieve a harmonious melody at the end of our study. Since we have built up on other works on this topic, we believe that a mathematician who has worked deeply on music's relation to mathematics can help to find a better fitness function. There is a room for improvement in this search and we believe it is achievable to remove human dependence in the innovative and creative task of music composition.
 
 \section*{Acknowledgment}
 What resources we have used and who has helped us
