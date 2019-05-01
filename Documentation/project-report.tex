@@ -61,13 +61,23 @@ From this population, certain chromosomes are selected for reproduction on the b
 
 This process of reproduction, mutation and selection will keep repeating until the criteria of termination have been fulfilled.
 
+\includegraphics{music.png}\\
+
 Before we proceed, it is important to understand some terms in music.
 
 \subsection{Note}
+A note is the pitch (frequency) and duration of a sound generally represented by letters,
+\begin{center}
+    $C-D-E-F-G-A-B$
+\end{center}
 
 \subsection{Octave}
+Octave is a series of eight notes, where 2 notes are separated by intervals. Consecutive octaves have half or twice the frequency of each other.
 
 \subsection{Bar}
+The duration of the tone and frequency of the durations in the melody defines rhythm and basic unit of measurement - bar. It organizes the written music in small sections where each bar is a section of time and usually contains the same number of beats in it.
+
+
 
 \section{Related Work}
 %How other people have done it, What problems they faced
@@ -96,7 +106,7 @@ Octave is basically the interval between two notes with the same letter name wit
 The absolute note represents the note and octave together as one integer to facilitate in the functioning of the genetic algorithm. It is basically the product of the octave index and the number of notes per octave added to the letter index.
 
 The duration specifies the amount of time that the beat would play for. The duration $d$ is a denominator in the fraction $\frac{1}{d}$, so in the example above, the beat will play for one-fourth or a quarter of a second. If the duration was 2, the beat would play for half a second.
-\pagebreak
+
 \begin{center}
     [(0, 4, 32, 4), (6, 0, 6, 4), (4, 2, 20, 4), (6, 1, 14, 4),\\ (2, 1, 10, 4), (3, 1, 11, 4), (1, 3, 25, 4), (3, 4, 35, 4),\\ (5, 0, 5, 4), (0, 2, 16, 4), (7, 3, 31, 4), (2, 5, 42, 4),\\ (5, 3, 29, 4), (0, 2, 16, 4), (1, 5, 41, 4), (6, 0, 6, 4),\\ (7, 3, 31, 4), (7, 5, 47, 4), (5, 0, 5, 4), (0, 3, 24, 4),\\ (2, 3, 26, 4), (0, 5, 40, 4), (2, 5, 42, 4), (0, 1, 8, 4),\\ (3, 5, 43, 4), (4, 4, 36, 4), (5, 3, 29, 4), (5, 5, 45, 4),\\ (1, 1, 9, 4), (7, 3, 31, 4), (7, 4, 39, 4), (1, 1, 9, 4)]\\
     
@@ -177,7 +187,7 @@ We started with a low mutation rate, offspring size and generations and only usi
 The study was limited by human interaction. We were bound to listen to the music besides simply trusting the fitness function. This breaks complete dependence on the computer for generating music and involves the human brain to pass judgment. A melodious tune may not be rightly identified by the genetic algorithm, but we have gotten close to achieving a harmonious melody at the end of our study. Since we have built up on other works on this topic, we believe that a mathematician who has worked deeply on music's relation to mathematics can help find a better fitness function. There is room for improvement in this search and we believe it is possible to remove human dependence in the innovative and creative task of music composition.
 
 \section*{Acknowledgment}
-We thank Dr. Syeda Saleha Raza 
+We thank Dr. Syeda Saleha Raza for teaching us the course \textit{Computational Intelligence} which have allowed us to explore in depth the concept of genetic algorithms and study applications of it. We thank the researchers who have studied this topic deeply and provided us with papers that have increased our knowledge of the subject. We thank other online resources that have facilitated us to understand music terminologies, We thank our lovely friend, Faiza Amir who helped us understand musical terms because of her great interest in composing music.
 
 
 \begin{thebibliography}{00}
