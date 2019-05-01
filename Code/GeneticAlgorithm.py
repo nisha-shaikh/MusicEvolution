@@ -73,7 +73,9 @@ def BinaryTournament(population, sel):
 
 def Mutate(population, rate):
     for i in range(0, len(population)):
-        population[i].mutate(rate)
+        chance = round(random.uniform(0, 1), 2)
+        if chance < rate:
+            population[i].mutate(rate)
     return population
 
 

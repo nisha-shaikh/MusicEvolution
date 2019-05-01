@@ -28,7 +28,6 @@ class chromosome:
 
         self.chromoLength = len(self.melody)
         self.fitness = self.fitnessScore()
-        # self.fitness=random.randint(0,50)#for testing purpose as errors were generated
 
     def __repr__(self):
         '''
@@ -54,6 +53,7 @@ class chromosome:
         fitness += 2*self.fitnessByInterval()
         fitness += 2*self.fitnessByVariation()
         fitness += self.fitnessByDownBeat()
+        # fitness += self.fitnessByBackbeat()
         return fitness
 
     def fitnessByOctave(self):
@@ -92,19 +92,31 @@ class chromosome:
         '''
         fitness = 0
         for i in range(self.chromoLength - 2):
-            succNotes = self.melody[i:i+2]
+            succNotes = self.melody[i:i+3]
             inc = all(x <= y for x, y in zip(succNotes, succNotes[1:]))
             dec = all(x >= y for x, y in zip(succNotes, succNotes[1:]))
             if inc or dec:
                 fitness += 1
         return fitness
-    
+
     def fitnessByDownBeat(self):
         '''
-        Higher fitness if more bars start with the major diatonic triad notes (C, E, or G)
+        Higher fitness if more bars start with the C major triad notes (C, E, or G)
         '''
         fitness = 0
         for i in range(0, BEATS_PER_SECTION, BARS_PER_SECTION):
+            note_idx = self.melody[i][0]
+            note = DIATONIC_REST[note_idx]
+            if note in CHORD_NOTES:
+                fitness += BEATS_PER_BAR
+        return fitness
+
+    def fitnessByBackbeat(self):
+        '''
+        Higher fitness if the second and fourth notes are siginificant (C, E or G)
+        '''
+        fitness = 0
+        for i in range(1, BEATS_PER_SECTION, 2):
             note_idx = self.melody[i][0]
             note = DIATONIC_REST[note_idx]
             if note in CHORD_NOTES:
