@@ -7,7 +7,9 @@ import pysynth_b
 class chromosome:
 
     def __init__(self, newMelody):  # R for random, else new melody
-        '''Create a chromosone i.e. melody'''
+        '''
+        Create a chromosone i.e. melody
+        '''
 
         self.melody = []
 
@@ -29,7 +31,9 @@ class chromosome:
         # self.fitness=random.randint(0,50)#for testing purpose as errors were generated
 
     def __repr__(self):
-        # Representation of the chromosone structure
+        '''
+        Representation of the chromosone structure
+        '''
         return (str(self.melody))
 
     def gen_note(self):
@@ -39,6 +43,60 @@ class chromosome:
         duration = DEFAULT_DURATION
 
         return (note_idx, octave_idx, abs_note, duration)
+
+    def fitnessScore(self):
+        '''
+        Based on some characteristics of music, fitness score of the entire melody is evaluated
+        Higher fitness values denote better individuals
+        '''
+        fitness = 0
+        fitness += 3*self.fitnessByOctave()
+        fitness += 2*self.fitnessByInterval()
+        fitness += 2*self.fitnessByVariation()
+        return fitness
+
+    def fitnessByOctave(self):
+        '''
+        Finds the fitness of the chromosome based on octave
+        Tunes with many notes in the same octave are more desirable
+        '''
+        fitness = 0
+        octaves = []
+        for i in range(self.chromoLength):
+            octaves.append(self.melody[i][1])
+        commonOctaves = collections.Counter(octaves)
+        mostCommonOctave = commonOctaves.most_common(1)
+        # frequency of the most repeated octave is the fitness value
+        fitness += mostCommonOctave[0][1]
+        return fitness
+
+    def fitnessByInterval(self):
+        '''
+        Finds the fitness of chromosome based on intervals
+        Higher fitness for tunes that have more intervals within the perfect fourth
+        '''
+        fitness = 0
+        abs_note_idx = 2
+        for i in range(self.chromoLength-1):
+            # interval is calculated for every successive note (which is stored as abs_note in self.melody)
+            interval = abs(self.melody[i][abs_note_idx] -
+                           self.melody[i+1][abs_note_idx])
+            if interval <= 4:
+                fitness += 1
+        return fitness
+
+    def fitnessByVariation(self):
+        '''
+        Higher fitness if three successive notes all rise or all fall to give a sense of continuity
+        '''
+        fitness = 0
+        for i in range(self.chromoLength - 2):
+            succNotes = self.melody[i:i+2]
+            inc = all(x <= y for x, y in zip(succNotes, succNotes[1:]))
+            dec = all(x >= y for x, y in zip(succNotes, succNotes[1:]))
+            if inc or dec:
+                fitness += 1
+        return fitness
 
     def crossover(self, chromo1):
         crossover_idx = random.randrange(0, self.chromoLength)
@@ -59,48 +117,18 @@ class chromosome:
                 self.melody[j] = self.gen_note()
         self.fitness = self.fitnessScore()
 
-    def fitnessScore(self):
-        '''Based on some characteristics of music, fitness score of the entire melody is evaluated
-        Higher fitness values denote better individuals'''
-        fitness = 0
-        fitness += 3*self.fitnessByOctave()
-        fitness += 2*self.fitnessByInterval()
-        return fitness
-
-    def fitnessByOctave(self):
-        '''Finds the fitness of the chromosome based on octave
-        Tunes with many notes in the same octave are more desirable'''
-        fitness = 0
-        octaves = []
-        for i in range(self.chromoLength):
-            octaves.append(self.melody[i][1])
-        commonOctaves = collections.Counter(octaves)
-        mostCommonOctave = commonOctaves.most_common(1)
-        # frequency of the most repeated octave is the fitness value
-        fitness += mostCommonOctave[0][1]
-        return fitness
-
-    def fitnessByInterval(self):
-        '''Finds the fitness of chromosome based on intervals
-        Higher fitness for tunes that have more jumps within the perfect fourth'''
-        fitness = 0
-        abs_note_idx = 2
-        for i in range(self.chromoLength-1):
-            # interval is calculated for every successive note (which is stored as abs_note in self.melody)
-            interval = abs(self.melody[i][abs_note_idx] -
-                           self.melody[i+1][abs_note_idx])
-            if interval <= 4:
-                fitness += 1
-        return fitness
-
     def genMusic(self, filename):
-        '''Uses pysynth to play the music'''
+        '''
+        Uses pysynth to play the music
+        '''
         tune = self.chromoToTune()
         pysynth_b.make_wav(tune, fn='{}.wav'.format(
             filename), leg_stac=0.7, bpm=180)
 
     def chromoToTune(self):
-        '''Converts chromosome in a better representaiton of music that PySynth can recognize'''
+        '''
+        Converts chromosome in a better representaiton of music that PySynth can recognize
+        '''
         convertedTune = []
         for i in range(self.chromoLength):
             # gives the note ('cdefgabr') referenced by note_idx
