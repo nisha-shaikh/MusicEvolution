@@ -122,24 +122,24 @@ Following are the attributes we used:
 A composition sounds more pleasant if the pitch values of its notes are relatively close to each other \cite{b2}. Pitch and octave are similar in that they both denote the frequency of the note. Hence, to make sure the pitches are close to each other, we favored chromosomes that have more beats with the same octave.
 
 \subsubsection{Interval}
-
+As the compositions have been created randomly, there is a chance that large intervals might occur, which do not sound too pleasing \cite{b3}. Hence, this function would give better fitness scores to compositions with small intervals. The perfect fourth interval is preferred \cite{b1} because it sounds the most pleasing to the ears.
 
 \subsubsection{Variation}
-
+This function evaluates the amount of changes in pitch direction \cite{b2}. Frequent variation in pitch direction does not sound aesthetically pleasing to the ears, so this function rewards compositions with a more stable direction. The function will evaluate every three succeeding notes to see if they all rise or fall, awarding better scores if all three are in the same direction.
 
 \subsubsection{Down Beat}
-
+Down beat is the first beat in a bar and is usually the most significant one. Chord notes (which are $C, E$ and $G$ in our case) sound better as the down beat, so compositions with a higher number of bars with a chord note as the down beat will be given a better fitness score.
 
 \subsection{Crossover}
-Crossover scheme for this algorithm involves choosing a random index in the range of the length of the melody. Each crossover leads to generate exactly 2 children. The first part of Offspring 1 is chosen from parent 1 and the second part is from parent 2. On the other hand, the first part of Offspring 2 is chosen from parent 2 and the second part is from parent 1. \\
+Crossover scheme for this algorithm involves choosing a random index in the range of the length of the melody. Each crossover leads to exactly 2 children. The first part of offspring 1 is chosen from parent 1 and the second part from parent 2. On the other hand, the first part of offspring 2 is chosen from parent 2 and the second part from parent 1.
 
 \subsection{Mutation}
-Mutation scheme for this algorithm mutates based on a mutation rate. A random number is generated and if it lies within the set mutation rate, the chromosome is mutated. The process will produce a new note wherever mutation rate is met.
+Mutation scheme for this algorithm works based on a mutation rate. A random number is generated and if it lies within the set mutation rate, the chromosome is mutated. However, the entire chromosome is not changed. For every beat in the chromosome, a random number is generated and if it is less than the mutation rate, a new beat will be produced.
 
 \subsection{Evolutionary Algorithm}
 Combining all techniques above, we evolved the population in search of finding the melody with the highest fitness. At the end of set $n$ generations, the population is sorted with respect to fitness and the highest fitness melody is stored as the best melody. However, listening to the music allowed us to judge how good the melody is, based on how good it sounds to the human ear. Therefore, judging fitness was not only restricted to a number.
 
-\subsection{Generating music files using PySynth}
+\subsection{Generating Music Files Using PySynth}
 We used a library "PySynth" to produce music files. The chromosome structure is treated such that the melody is turned into a ".wav" file which is playable by any music player.
 
 
@@ -160,10 +160,11 @@ What resources we have used and who has helped us
 
 
 \begin{thebibliography}{00}
-\bibitem{b1} D. Matic, "A genetic algorithm for composing music", \textit{Yugoslav Journal of Operations Research}, vol. 20, no. 1, pp. 157-177, 2010. Available: 10.2298/yjor1001157m [Accessed 19 April 2019].
+\bibitem{b1} D. Matic, "A genetic algorithm for composing music," \textit{Yugoslav Journal of Operations Research}, vol. 20, no. 1, pp. 157-177, 2010. Available: 10.2298/yjor1001157m [Accessed 19 April 2019].
 \bibitem{b2}V. Anderling, O. Andreasson, C. Olsson, S. Pavlov, C. Svensson, and J. Wikner, "Generation of music through genetic algorithms," 2014.
-\bibitem{b3} Z. Geem and J. Choi, "Music Composition Using Harmony Search Algorithm", \textit{Lecture Notes in Computer Science}, pp. 593-600. Available: 10.1007/978-3-540-71805-5\_65 [Accessed 19 April 2019].
-\bibitem{b4} A. Freitas, F. Guimarães and R. Barbosa, "Automatic Evaluation Methods in Evolutionary Music: An Example with Bossa Melodies", \textit{Lecture Notes in Computer Science}, pp. 458-467, 2012. Available: 10.1007/978-3-642-32964-7\_46 [Accessed 19 April 2019].
+\bibitem{b3}G. Papadopoulos and G. Wiggins, "A Genetic Algorithm for the Generation of Jazz Melodies," 2000
+\bibitem{b4} Z. Geem and J. Choi, "Music Composition Using Harmony Search Algorithm", \textit{Lecture Notes in Computer Science}, pp. 593-600. Available: 10.1007/978-3-540-71805-5\_65 [Accessed 19 April 2019].
+\bibitem{b5} A. Freitas, F. Guimarães and R. Barbosa, "Automatic Evaluation Methods in Evolutionary Music: An Example with Bossa Melodies", \textit{Lecture Notes in Computer Science}, pp. 458-467, 2012. Available: 10.1007/978-3-642-32964-7\_46 [Accessed 19 April 2019].
 \end{thebibliography}
 
 \end{document}
