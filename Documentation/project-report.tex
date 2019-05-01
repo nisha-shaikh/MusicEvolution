@@ -70,7 +70,11 @@ Before we proceed, it is important to understand some terms in music.\\
 
 \section{Related Work}
 %How other people have done it, What problems they faced
-Our presentation paper, 
+The inspiration to our study is the paper $[1]$ \textit{"A Genetic Algorithm For Composing Music" by Dragan MATIĆ} which exposed us to intelligent music composition for the first time. The paper develops on composing melodies in comparison to a reference melody. With a different mechanism involved for constructing a melody, the idea of composition in this paper is restricted to a similarity value of a chromosome with respect to a reference melody. The similarity is calculated based on a defined \textit{"distance"} of an individual with the reference one. \\
+
+The implementation of genetic algorithm is based on simply \textit{mutation} where each generation is only mutated to evolve and compose better pieces of music. The algorithm utilizes 3 different ways to mutate the chromosomes. An interesting mechanism of selection is utilized called, \textit{elimination selection} whereby all individuals of low fitness are removed and all duplicates (individuals of the same fitness) are also removed. Therefore, at each iteration, the population consists of individuals with distinct fitness. Experimentation and results of this study proved fruitful as it resulted in beautiful composition as claimed by the researcher. Although, the algorithm leaves possible room for controlling parameters, the existence of a reference melody assists in producing more rhythmic and harmonious music. Algorithm is designed in such a way as to incorporate mathematical functions that evaluate fitness based on other parameters. \\
+
+Gaining inspiration from this algorithm, we have attempted to use some mathematical functions to determine fitness of the melodies which will be discussed ahead in this paper.
 
 \section{Methodology}
 Our approach is to utilize our learning of genetic algorithm to compose music. We start by randomly generating notes to create random melodies, which will comprise our population. These melodies will then go through the reproduction, mutation and selection processes for a certain number of generations.
