@@ -53,6 +53,7 @@ With the genetic algorithm we implemented, melodies will be represented as a lis
 
 \section{Technical Background}
 %Explain techniques used in the project
+\subsection{Genetic Algorithm}
 The main technique used in this paper is the genetic algorithm. It has been inspired by the process of biological evolution and proves beneficial for optimization. Using concepts of reproduction, mutation, selection and recombination on candidate solutions (chromosomes), genetic algorithms can solve an optimization problem. A fitness function determines how good the candidate solution is and works by evolving the solutions to obtain the optimum solution to the problem.
 
 The algorithm starts by generating a population with $n$ chromosomes, where $n$ is determined by the user and every chromosome denotes a candidate solution to the problem.
@@ -61,24 +62,26 @@ From this population, certain chromosomes are selected for reproduction on the b
 
 This process of reproduction, mutation and selection will keep repeating until the criteria of termination have been fulfilled.
 
-\includegraphics{music.png}\\
+\subsection{Music}
+\includegraphics{music.png}
 
 Before we proceed, it is important to understand some terms in music.
 
-\subsection{Note}
+\subsubsection{Note}
 A note is the pitch (frequency) and duration of a sound generally represented by letters,
 \begin{center}
     $C-D-E-F-G-A-B$
 \end{center}
+\begin{figure}
 \includegraphics[width=7 cm, height=7 cm]{notes.png}
+\caption{Notes on the C-Scale \cite{b4}}
+\end{figure}
 
-\subsection{Octave}
+\subsubsection{Octave}
 Octave is a series of eight notes, where 2 notes are separated by intervals. Consecutive octaves have half or twice the frequency of each other.
 
-\subsection{Bar}
-The duration of the tone and frequency of the durations in the melody defines rhythm and basic unit of measurement - bar. It organizes the written music in small sections where each bar is a section of time and usually contains the same number of beats in it.
-
-
+\subsubsection{Bar}
+The duration of the beat and frequency of the durations in the melody defines rhythm and basic unit of measurement - bar. It organizes the written music in small sections where each bar is a section of time and usually contains the same number of beats in it.
 
 \section{Related Work}
 %How other people have done it, What problems they faced
@@ -102,7 +105,7 @@ The chromosome for a melody is represented as a list of 4-tuples, where each tup
 
 The note index will refer to the notes $C, D, E, F, G, A,$ and $B$ along with rest (which, in music terminology, means an interval of silence). Hence, in the example above, the beat is a $C$ note.
 
-Octave is basically the interval between two notes with the same letter name with one having double or half the frequency of the other. For example, the octave can go from $C-C$ with one $C$ note having half or double the frequency of the other $C$ note. Hence, the beat above is a $C4$ note.
+Octave is basically the interval between two notes with the same letter name with one having double or half the frequency of the other. For example, the octave can go from $C-C$ with one $C$ note having half or double the frequency of the other $C$ note. The octave index starts from 0, so the beat above is a $C5$ note.
 
 The absolute note represents the note and octave together as one integer to facilitate in the functioning of the genetic algorithm. It is basically the product of the octave index and the number of notes per octave added to the letter index.
 
@@ -146,11 +149,6 @@ This function evaluates the amount of changes in pitch direction \cite{b2}. Freq
 \subsubsection{Down Beat}
 Down beat is the first beat in a bar and is usually the most significant one. Chord notes (which are $C, E$ and $G$ in our case) sound better as the down beat, so compositions with a higher number of bars with a chord note as the down beat will be given a better fitness score.
 
-\begin{figure}
-\includegraphics[width=10 cm, height= 10 cm ]{Flowchart.png}
-\caption{ Flowchart of the Genetic Algorithm for Music Composition}
-\end{figure}
-
 \subsection{Crossover}
 Crossover scheme for this algorithm involves choosing a random index in the range of the length of the melody. Each crossover leads to exactly 2 children. The first part of offspring 1 is chosen from parent 1 and the second part from parent 2. On the other hand, the first part of offspring 2 is chosen from parent 2 and the second part from parent 1.
 
@@ -158,7 +156,14 @@ Crossover scheme for this algorithm involves choosing a random index in the rang
 Mutation scheme for this algorithm works based on a mutation rate. A random number is generated and if it lies within the set mutation rate, the chromosome is mutated. However, the entire chromosome is not changed. For every beat in the chromosome, a random number is generated and if it is less than the mutation rate, a new beat will be produced.
 
 \subsection{Evolutionary Algorithm}
-Combining all techniques above, we evolved the population to find the melody with the highest fitness. At the end of the set $n$ generations, the population is sorted with respect to fitness and the highest fitness melody is stored as the best melody. However, listening to the music allowed us to judge how good the melody is based on how good it sounds to the human ear. Although our algorithm was not an "interactive composition" algorithm, this allowed us to adjust the multipliers for the fitness function to produce better music. This was done during the experimentation process to find the best combination of paramters and fitness multipliers.
+
+\begin{figure}
+\includegraphics[width=10 cm, height= 10 cm ]{Flowchart.png}
+\caption{ Flowchart of the Genetic Algorithm for Music Composition}
+\label{flow}
+\end{figure}
+
+Combining all techniques above, we evolved the population to find the melody with the highest fitness using the algorithm shown in Fig. ~\ref{flow}. At the end of the set $n$ generations, the population is sorted with respect to fitness and the highest fitness melody is stored as the best melody. However, listening to the music allowed us to judge how good the melody is based on how good it sounds to the human ear. Although our algorithm was not an "interactive composition" algorithm, this allowed us to adjust the multipliers for the fitness function to produce better music. This was done during the experimentation process to find the best combination of paramters and fitness multipliers.
 
 \subsection{Generating Music Files Using PySynth}
 We used a library ``PySynth B" to produce music files. The chromosome structure is treated such that the melody is turned into a ``.wav" file which is playable by any music player. Its method ``make\_wav" takes a tuple of 2-tuples that describe the melody. The first value of the 2-tuple describes the note and its octave, and the second value describes the duration of the beat. Hence, for PySynth B, the 2-tuple (`c5', 4) denotes a $C5$ beat that plays for a quarter of a second.
@@ -171,6 +176,8 @@ We used a library ``PySynth B" to produce music files. The chromosome structure 
 %Experiment settings\\
 %Results and comparison if done\\
 %Analysis of results (whether they are good; if they are bad, then in what situations are they bad)\\
+To start with, we fixed the music scale to C major since that is the most popular music scale used. Furthermore, we fixed the octave range from $C2$ to $C7$. Hence, the octave index 0 would refer to the second octave instead of the first one.
+
 We tested our algorithm with different sets of parameters. Controlling population size, mutation rate , selection schemes, offspring size and number of generations, we tried to produce harmonious melodies. As expected, human interaction was necessary to identify good pieces of melody. At each moment that we made a change in parameters, we would stop and listen to the best melody generated at the end to judge how well the algorithm is working.
 
 After experimentation with different parameter values, we set the following parameters:
@@ -184,6 +191,21 @@ After experimentation with different parameter values, we set the following para
 
 We started with a low mutation rate, offspring size and generations and only using the truncation selection scheme, but the fitness value of the population did not change too much and the melody produced at the end wasn't too pleasing to hear. We tweaked these parameters until the melody at the end was much better. We used the binary tournament selection scheme to select the parents and truncation for only selecting the new generation, and our results vastly improved.
 
+The first generation created randomly had a lot of jumps and did not sound pleasant to the ears. The music notation of its best melody is shown in Fig. ~\ref{gen-0}, which has been created used \textit{AmazingMIDI} and \textit{notation composer}. The notation shows the melody had a lot of rests as well. On the other hand, the best composition of the last generation sounded more melodious. Its music notation is shown in Fig. ~\ref{final}.
+
+\begin{figure*}
+\includegraphics[width=20 cm]{gen-0.png}
+\caption{Music Notation of Best Melody in $0^{th}$ Generation}
+\label{gen-0}
+\end{figure*}
+
+\begin{figure*}
+\includegraphics[width=20 cm]{final.png}
+\caption{Music Notation of Best Melody in $5000^{th}$ Generation}
+\label{final}
+\end{figure*}
+
+
 \section{Conclusion}
 The study was limited by human interaction. We were bound to listen to the music besides simply trusting the fitness function. This breaks complete dependence on the computer for generating music and involves the human brain to pass judgment. A melodious tune may not be rightly identified by the genetic algorithm, but we have gotten close to achieving a harmonious melody at the end of our study. Since we have built up on other works on this topic, we believe that a mathematician who has worked deeply on music's relation to mathematics can help find a better fitness function. There is room for improvement in this search and we believe it is possible to remove human dependence in the innovative and creative task of music composition.
 
@@ -195,6 +217,7 @@ We thank Dr. Syeda Saleha Raza for teaching us the course \textit{Computational 
 \bibitem{b1} D. Matic, ``A genetic algorithm for composing music," \textit{Yugoslav Journal of Operations Research}, vol. 20, no. 1, pp. 157-177, 2010. Available: 10.2298/yjor1001157m [Accessed 19 April 2019].
 \bibitem{b2}V. Anderling, O. Andreasson, C. Olsson, S. Pavlov, C. Svensson, and J. Wikner, ``Generation of music through genetic algorithms," 2014.
 \bibitem{b3}G. Papadopoulos and G. Wiggins, ``A Genetic Algorithm for the Generation of Jazz Melodies," 2000
+\bibitem{b4}“How To Read Sheet Music: Step-by-Step Instructions,” \textit{Musicnotes Now}, 21-Jan-2019. [Online]. Available: https://www.musicnotes.com/now/tips/how-to-read-sheet-music/. [Accessed: 02-May-2019].
 \end{thebibliography}
 
 \end{document}
