@@ -155,7 +155,7 @@ Crossover scheme for this algorithm involves choosing a random index in the rang
 \subsection{Mutation}
 Mutation scheme for this algorithm works based on a mutation rate. A random number is generated and if it lies within the set mutation rate, the chromosome is mutated. However, the entire chromosome is not changed. For every beat in the chromosome, a random number is generated and if it is less than the mutation rate, a new beat will be produced.
 
-\subsection{Evolutionary Algorithm}
+\subsection{Genetic Algorithm}
 
 \begin{figure}
 \includegraphics[width=10 cm, height= 10 cm ]{Flowchart.png}
@@ -176,7 +176,7 @@ We used a library ``PySynth B" to produce music files. The chromosome structure 
 %Experiment settings\\
 %Results and comparison if done\\
 %Analysis of results (whether they are good; if they are bad, then in what situations are they bad)\\
-To start with, we fixed the music scale to C major since that is the most popular music scale used. Furthermore, we fixed the octave range from $C2$ to $C7$. Hence, the octave index 0 would refer to the second octave instead of the first one.
+To start with, we fixed the music scale to C major since that is the most popular music scale used. Furthermore, we fixed the octave range from $C2$ to $C7$. Hence, the octave index 0 would refer to the second octave instead of the first one. We also kept the musical composition generated to 32 beats with 4 beats per bar and 8 bars in total. We kept the composition short to keep the speed of the process low. We also kept the duration of every beat to a quarter of a second.
 
 We tested our algorithm with different sets of parameters. Controlling population size, mutation rate , selection schemes, offspring size and number of generations, we tried to produce harmonious melodies. As expected, human interaction was necessary to identify good pieces of melody. At each moment that we made a change in parameters, we would stop and listen to the best melody generated at the end to judge how well the algorithm is working.
 
@@ -205,6 +205,7 @@ The first generation created randomly had a lot of jumps and did not sound pleas
 \label{final}
 \end{figure*}
 
+As stated before, the musical composition generated is very short and doesn't give such a good idea about the changes. However, this composition can be arranged in an AABA format, which is a very popular format used by many famous songs. Each section in this format is composed of 32 beats. We will only need to create another melody using the algorithm, which can be B, and arrange the two melodies in AABA format to make a longer composition.
 
 \section{Conclusion}
 The study was limited by human interaction. We were bound to listen to the music besides simply trusting the fitness function. This breaks complete dependence on the computer for generating music and involves the human brain to pass judgment. A melodious tune may not be rightly identified by the genetic algorithm, but we have gotten close to achieving a harmonious melody at the end of our study. Since we have built up on other works on this topic, we believe that a mathematician who has worked deeply on music's relation to mathematics can help find a better fitness function. There is room for improvement in this search and we believe it is possible to remove human dependence in the innovative and creative task of music composition.
