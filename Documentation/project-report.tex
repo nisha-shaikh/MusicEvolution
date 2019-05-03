@@ -141,7 +141,7 @@ Following are the attributes we used:
 A composition sounds more pleasant if the pitch values of its notes are relatively close to each other \cite{b2}. Pitch and octave are similar in that they both denote the frequency of the note. Hence, to make sure the pitches are close to each other, we favored chromosomes that have more beats with the same octave.
 
 \subsubsection{Interval}
-As the compositions have been created randomly, there is a chance that large intervals might occur, which do not sound too pleasing \cite{b3}. Hence, this function would give better fitness scores to compositions with small intervals. The perfect fourth interval is preferred \cite{b1} because it sounds the most pleasing to the ears.
+As the compositions have been created randomly, there is a chance that large intervals might occur, which do not sound too pleasing \cite{b6}. Hence, this function would give better fitness scores to compositions with small intervals. The perfect fourth interval is preferred \cite{b4} because it sounds the most pleasing to the ears.
 
 \subsubsection{Variation}
 This function evaluates the amount of changes in pitch direction \cite{b2}. Frequent variation in pitch direction does not sound aesthetically pleasing to the ears, so this function rewards compositions with a more stable direction. The function will evaluate every three succeeding notes to see if they all rise or fall, awarding better scores if all three are in the same direction.
@@ -153,7 +153,7 @@ Down beat is the first beat in a bar and is usually the most significant one. Ch
 Crossover scheme for this algorithm involves choosing a random index in the range of the length of the melody. Each crossover leads to exactly 2 children. The first part of offspring 1 is chosen from parent 1 and the second part from parent 2. On the other hand, the first part of offspring 2 is chosen from parent 2 and the second part from parent 1.
 
 \subsection{Mutation}
-Mutation scheme for this algorithm works based on a mutation rate. A random number is generated and if it lies within the set mutation rate, the chromosome is mutated. However, the entire chromosome is not changed. For every beat in the chromosome, a random number is generated and if it is less than the mutation rate, a new beat will be produced.
+Mutation scheme for this algorithm works based on a mutation rate. A random number is generated and if it lies within the set mutation rate, the chromosome is mutated. However, the entire chromosome is not changed. For every beat in the chromosome, a random number is generated and if it is less than the mutation rate, a new beat will be randomly produced \cite{b7}.
 
 \subsection{Genetic Algorithm}
 
@@ -219,6 +219,9 @@ We thank Dr. Syeda Saleha Raza for teaching us the course \textit{Computational 
 \bibitem{b2}V. Anderling, O. Andreasson, C. Olsson, S. Pavlov, C. Svensson, and J. Wikner, ``Generation of music through genetic algorithms," 2014.
 \bibitem{b3}G. Papadopoulos and G. Wiggins, ``A Genetic Algorithm for the Generation of Jazz Melodies," 2000
 \bibitem{b4}“How To Read Sheet Music: Step-by-Step Instructions,” \textit{Musicnotes Now}, 21-Jan-2019. [Online]. Available: https://www.musicnotes.com/now/tips/how-to-read-sheet-music/. [Accessed: 02-May-2019].
+\bibitem{b5} Z. Geem and J. Choi, ``Music Composition Using Harmony Search Algorithm", \textit{Lecture Notes in Computer Science}, pp. 593-600. Available: 10.1007/978-3-540-71805-5\_65 [Accessed 19 April 2019].
+\bibitem{b6} A. Freitas, F. Guimarães and R. Barbosa, ``Automatic Evaluation Methods in Evolutionary Music: An Example with Bossa Melodies", \textit{Lecture Notes in Computer Science}, pp. 458-467, 2012. Available: 10.1007/978-3-642-32964-7\_46 [Accessed 19 April 2019].
+\bibitem{b7}[2]M. Marques, V. Oliveira, S. Vieira and A. Rosa, "Music composition using genetic evolutionary algorithms", \textit{Proceedings of the 2000 Congress on Evolutionary Computation. CEC00 (Cat. No.00TH8512)}, 2000. Available: 10.1109/cec.2000.870368 [Accessed 2 May 2019].
 \end{thebibliography}
 
 \end{document}
